@@ -1,0 +1,49 @@
+const animeList = [
+  {
+    title: "Attack on Titan",
+    image: "https://i.imgur.com/C3yD1kF.jpg",
+    genres: "Action, Drama"
+  },
+  {
+    title: "One Piece",
+    image: "https://i.imgur.com/VmNCYBu.jpg",
+    genres: "Adventure, Fantasy"
+  },
+  {
+    title: "Jujutsu Kaisen",
+    image: "https://i.imgur.com/jjlH3Wx.jpg",
+    genres: "Supernatural, Action"
+  },
+  {
+    title: "Demon Slayer",
+    image: "https://i.imgur.com/7CWzHfI.jpg",
+    genres: "Action, Historical"
+  }
+];
+
+const animeListContainer = document.getElementById('anime-list');
+const searchInput = document.getElementById('search');
+
+function displayAnime(animeArray) {
+  animeListContainer.innerHTML = '';
+  animeArray.forEach(anime => {
+    const card = document.createElement('div');
+    card.className = 'anime-card';
+    card.innerHTML = `
+      <img src="${anime.image}" alt="${anime.title}">
+      <h3>${anime.title}</h3>
+      <p>${anime.genres}</p>
+    `;
+    animeListContainer.appendChild(card);
+  });
+}
+
+searchInput.addEventListener('input', () => {
+  const value = searchInput.value.toLowerCase();
+  const filtered = animeList.filter(a =>
+    a.title.toLowerCase().includes(value)
+  );
+  displayAnime(filtered);
+});
+
+displayAnime(animeList);
